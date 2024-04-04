@@ -62,6 +62,7 @@ class ProdiDetail extends StatelessWidget {
               child: Text(
                 prodi.profile,
                 style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.justify,
               ),
             ),
             Padding(
@@ -76,6 +77,7 @@ class ProdiDetail extends StatelessWidget {
               child: Text(
                 prodi.visi,
                 style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.justify,
               ),
             ),
             Padding(
@@ -92,7 +94,10 @@ class ProdiDetail extends StatelessWidget {
                     (misi) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: ListTile(
-                        title: Text(misi.misi),
+                        title: Text(
+                          misi.misi,
+                          textAlign: TextAlign.justify,
+                        ),
                       ),
                     ),
                   )
@@ -167,7 +172,10 @@ class ProdiDetail extends StatelessWidget {
                     (prestasi) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: ListTile(
-                        title: Text(prestasi.prestasiMahasiswa),
+                        title: Text(
+                          prestasi.prestasiMahasiswa,
+                          textAlign: TextAlign.justify,
+                          ),
                       ),
                     ),
                   )
@@ -225,4 +233,3 @@ if (await canLaunchUrl(u)) {
 }
 
 }
-
