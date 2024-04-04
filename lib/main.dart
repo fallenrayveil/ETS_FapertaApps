@@ -31,6 +31,13 @@ class MyApp extends StatelessWidget {
       title: 'Faperta Apps',
       theme: ThemeData(
         primarySwatch: white,
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.green,
+          titleTextStyle: TextStyle(color: Colors.white,
+          fontSize: 26),
+          actionsIconTheme: IconThemeData(color: Colors.white),
+        ),
       ),
       home: const MyHomePage(title: 'Faperta Apps'),
     );
@@ -70,10 +77,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                'akultas Pertanian Universitas Pembangunan Nasional “Veteran” Jawa Timur merupakan salah satu lembaga pendidikan tinggi bidang pertanian di Indonesia yang berdiri sejak 17 Mei 1968.',
+                'Fakultas Pertanian Universitas Pembangunan Nasional “Veteran” Jawa Timur merupakan salah satu lembaga pendidikan tinggi bidang pertanian di Indonesia yang berdiri sejak 17 Mei 1968.',
                 style: TextStyle(
                   fontSize: 16,
                 ),
+                textAlign: TextAlign.justify,
               ),
             ),
             SizedBox(height: 16),
