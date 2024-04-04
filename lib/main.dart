@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'prodi.dart';
 import 'prodi_detail.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 void main() {
   runApp(const MyApp());
@@ -69,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 'Profil Fakultas Pertanian',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 35,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -108,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+
       bottomNavigationBar: BottomAppBar(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -122,16 +124,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/hapis.jpg'), // Ganti dengan path gambar profil Anda
+                  backgroundImage: AssetImage('assets/gilang.jpg'), // Ganti dengan path gambar profil Anda
                   radius: 20,
                 ),
                 SizedBox(width: 8),
                 Text(
-                  'Hafiz Ilham Ardana',
+                  'Gilang Hayu Rahmawan',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -185,7 +188,34 @@ Widget buildProdiCard(Prodi prodi) {
   );
 }
 
-class UserProfile extends StatelessWidget {
+class UserProfile extends StatefulWidget {
+  @override
+  _UserProfileState createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
+  bool _isLoading = true; 
+
+  final String nama = 'Gilang Hayu Rahmawan';
+  final String ttl = 'Jombang, 17 Maret 2003';
+  final String alamat =
+      'Dsn.Wonokerto, Ds.Wonodadi, Kec.Mojosari, Kab.Mojokerto, Jawa Timur';
+  final String nomor = '+62 812-3274-1329';
+  final String email = 'fallenrayveil@gmail.com';
+  final String githubUrl = 'https://github.com/fallenrayveil';
+  final String pendidikan = 'Sistem Informasi - UPN Veteran Jawa Timur';
+  final String penghargaan = '-'; 
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,20 +224,61 @@ class UserProfile extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Nama: Hafiz Ilham Ardana'),
-            Text('TTL: Kediri, 25 Juni 2002'),
-            Text('Alamat: Karangrejo 7/25-G'),
-            Text('No. HP: +62 812-3398-0247'),
-            Text('Email: Ilhamhafiz2507@gmail.com'),
-            Text('Url Profil Github: https://github.com/hapistolero'),
-            Text('Riwayat Pendidikan:Sistem Informasi - UPN Veteran Jawa Timur'),
-            Text('Penghargaan: -'),
-          ],
+        child: SingleChildScrollView( 
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Profile picture with loading animation
+              _isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : CircleAvatar(
+                      radius: 130,
+                      backgroundImage: AssetImage('assets/gilang.jpg'),
+                    ),
+              SizedBox(height: 16),
+
+              // Profile information sections
+              _buildProfileSection('Nama:', nama),
+              _buildProfileSection('TTL:', ttl),
+              _buildProfileSection('Alamat:', alamat),
+              _buildProfileSection('No. HP:', nomor),
+              _buildProfileSection('Email:', email),
+              _buildProfileSection(
+                'Url Profil Github:',
+                githubUrl,
+                isUrl: true, 
+              ),
+              _buildProfileSection('Riwayat Pendidikan:', pendidikan),
+              _buildProfileSection('Penghargaan:', penghargaan),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+
+  Widget _buildProfileSection(String title, String value, {bool isUrl = false}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(width: 8),
+        Flexible(
+          child: isUrl
+              ? GestureDetector(
+                  onTap: () => launchUrlString(value),
+                  child: Text(
+                    value,
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                )
+              : Text(value),
+        ),
+      ],
     );
   }
 }
