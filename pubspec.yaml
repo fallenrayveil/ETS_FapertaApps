@@ -64,7 +64,7 @@ flutter:
   assets:
     - assets/agribisnis.png
     - assets/agroteknologi.png
-    - assets/hapis.jpg
+    - assets/gilang.jpg
    
 
   # An image asset can refer to one or more resolution-specific "variants", see
